@@ -1,0 +1,35 @@
+<mat-card class="mb-5">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <img mat-card-image style="height: 100% !important;" src="{{poster}}" alt="Movie Image">
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <h5>{{title}}</h5>
+            <div *ngIf="showDetails" class="detail-p">
+              <p style="font-weight: bold; margin-bottom: 0px !important;">Plot</p>
+              <p>{{movieDetais.Plot}}</p>
+
+              <p style="font-weight: bold; margin-bottom: 0px !important;">Actors</p>
+              <p>{{movieDetais.Actors}}</p>
+
+              <p style="font-weight: bold; margin-bottom: 0px !important;">Ratings</p>
+              <p *ngFor="let rate of movieDetais.Ratings">-{{rate.Source}} : {{rate.Value}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <span class="mr-auto" style="color:rgba(0,0,0,.54);">{{year}}</span>
+    <button matRipple matRippleCentered="false" matRippleDisabled="false" *ngIf="!showDetails"
+      matRippleUnbounded="false" (click)="getMovieDetailsByImdbId(imdbID)" mat-raised-button color="primary"
+      matTooltip="Show Details" style="float: right;">Details</button>
+    <button matRipple matRippleCentered="false" matRippleDisabled="false" *ngIf="showDetails" matRippleUnbounded="false"
+      (click)="readMore()" mat-raised-button color="primary" matTooltip="Hide Details" style="float: right;">Hide
+      Details</button>
+  </mat-card-actions>
+</mat-card>

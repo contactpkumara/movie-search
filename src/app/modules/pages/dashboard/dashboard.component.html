@@ -1,0 +1,40 @@
+<section alt="Search Movie Section" class="mb-5">
+  <mat-card>
+    <form [formGroup]="searchForm">
+      <div class="row">
+        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+          <mat-form-field class="full-width">
+            <mat-label>Movie Title</mat-label>
+            <input formControlName="searchKey" matInput placeholder="Movie Title">
+          </mat-form-field>
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+          <button class="cusstom-btn" matRipple matRippleCentered="false" matRippleDisabled="false"
+            [disabled]="!searchForm.valid" matRippleUnbounded="false" (click)="searchMovie()" mat-raised-button
+            color="primary" matTooltip="Search movie">Search</button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</section>
+
+<section alt="Movie Not Fount" class="mb-5" *ngIf="movies.length == 0">
+  <div class="alert alert-secondary text-center" role="alert">
+    Welcome to OMDB Movie Search! Search Something Above Search Bar. 
+  </div>
+</section>
+
+<section alt="Movie Not Fount" class="mb-5" *ngIf="movies.Response == 'False'">
+  <div class="alert alert-danger text-center" role="alert">
+    {{movies.Error}}
+  </div>
+</section>
+
+<section alt="View Movie Section" class="mb-5" *ngIf="movies.Response == 'True'">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4" *ngFor="let movie of movies.Search">
+      <app-movie-card title="{{movie.Title}}" poster="{{movie.Poster}}" year="{{movie.Year}}" imdbID="{{movie.imdbID}}">
+      </app-movie-card>
+    </div>
+  </div>
+</section>
